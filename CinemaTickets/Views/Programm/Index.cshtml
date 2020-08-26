@@ -1,0 +1,28 @@
+﻿@using CinemaTickets.Models;
+@model List<CalenderElement>
+
+@{
+    ViewBag.Title = "Programm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int i = 0;
+}
+
+<h2>Programm</h2>
+
+@if (ViewBag.Message != null) {
+<p style="color:red;">@ViewBag.Message</p><hr />
+}
+
+@foreach (CalenderElement el in Model)
+{
+    i++;
+    <div><span style="font-weight:bold;">Titel: </span>@el.Movie.Title</div>
+    <div><span style="font-weight:bold;">Beschreibung: </span>@el.Movie.Description</div>
+    <div><span style="font-weight:bold;">Zeit: </span>@el.Start</div>
+    <form method="post">
+        <input type="hidden" name="id" value="@el.Id" />
+        <button type="submit"><i class="fas fa-plus-square"></i></button>
+    </form>
+    if (i < Model.Count) { <hr /> }
+
+}

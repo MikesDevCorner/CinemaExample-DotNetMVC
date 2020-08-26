@@ -1,0 +1,29 @@
+﻿@using CinemaTickets.Models;
+@model Cart
+@{
+    ViewBag.Title = "Einkaufswagen";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int i = 0;
+}
+
+<h2>Einkaufswagen</h2>
+
+@if (ViewBag.Message != null)
+{
+    <p style="color:red;">@ViewBag.Message</p><hr />
+}
+
+@foreach (CalenderElement el in Model)
+{
+    i++;
+    <div><span style="font-weight:bold;">Titel: </span>@el.Movie.Title</div>
+    <div><span style="font-weight:bold;">Zeit: </span>@el.Start</div>
+    <div><span style="font-weight:bold;">Preis: </span>@el.Movie.Price.ToString("€ #.00")</div>
+    <form method="post" action="/Cart/Delete">
+        <input type="hidden" name="id" value="@el.Id" />
+        <button type="submit"><i class="fas fa-trash" style="color:red;"></i></button>
+    </form>
+    <hr />
+}
+
+<div style="color:green;"><span style="font-weight:bold;">Wert des Einkaufswagens: </span>@Model.CartPrice.ToString("€ #.00")</div>
